@@ -1,7 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { use } from "react";
+import { Link } from "react-router";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
+
+      const {signInWithGoogle} = use(AuthContext)
+    
+      const handleGoogleSignIn = () =>{
+        signInWithGoogle()
+        .then(result => {
+            console.log(result)
+        })
+        .catch(error =>{
+            console.log(error)
+        });
+      }
 
     const handleLogin = (e) =>{
         e.preventDefault()
@@ -79,7 +92,8 @@ const Login = () => {
           </div>
 
           <div className="mt-6">
-            <button
+            <button 
+            onClick={handleGoogleSignIn}
               type="button"
               className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
             >

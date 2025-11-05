@@ -2,20 +2,35 @@ import React, { use } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
-
 const Register = () => {
+  const { signInWithGoogle } = use(AuthContext);
 
-  const {signInWithGoogle} = use(AuthContext)
-
-  const handleGoogleSignIn = () =>{
+  const handleGoogleSignIn = () => {
     signInWithGoogle()
-    .then(result => {
-        console.log(result)
-    })
-    .catch(error =>{
-        console.log(error)
-    });
-  }
+      .then((result) => {
+        console.log(result.user);
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        };
+        //Create User in the database:
+        fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("dta after user save", data);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -31,7 +46,7 @@ const Register = () => {
             </Link>
           </p>
         </div>
-        <form className="mt-8 space-y-6" >
+        <form className="mt-8 space-y-6">
           <div className="space-y-4">
             <div>
               <label
@@ -120,7 +135,7 @@ const Register = () => {
           </div>
 
           <div className="mt-6">
-            <button 
+            <button
               onClick={handleGoogleSignIn}
               type="button"
               className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
