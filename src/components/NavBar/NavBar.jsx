@@ -23,7 +23,7 @@ const NavBar = () => {
         }
     </>
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="container mx-auto navbar bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -60,8 +60,8 @@ const NavBar = () => {
       <div className="navbar-end">
         {
         user ?
-        <a onClick={handleSignout} className="btn bg-accent border-0 text-white">Sign Out</a>:
-        <Link to={"/login"} className="btn bg-accent border-0 text-white">Login </Link>
+        <a onClick={handleSignout} className="btn btn-primary bg-accent border-0 text-white">Sign Out</a>:
+        <Link to={"/login"} className="btn btn-primary bg-accent border-0 text-white">Login </Link>
         }
       </div>
     </div>

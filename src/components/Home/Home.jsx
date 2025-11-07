@@ -1,6 +1,11 @@
 import React from "react";
 import leftBg from "../../assets/left-bg.png";
 import rightBg from "../../assets/right-bg.png";
+import LatestProducts from "../LatestProducts/LatestProducts";
+
+const latestProductsPromise = fetch('http://localhost:3000/latest-products')
+.then(res => res.json())
+
 
 const Home = () => {
   return (
@@ -61,15 +66,20 @@ const Home = () => {
 
             {/* Action Buttons */}
             <div className="flex justify-center gap-4">
-              <button className="bg-[#8B5CF6] text-white px-8 py-3 rounded-full hover:bg-[#7C3AED] transition-colors">
+              <button className="btn-primary text-white px-8 py-3 rounded-full transition-colors">
                 Watch All Products
               </button>
-              <button className="border-2 border-[#8B5CF6] text-[#8B5CF6] px-8 py-3 rounded-full hover:bg-[#8B5CF6] hover:text-white transition-colors">
+              <button className="border-2 border-[#8B5CF6] text-[#8B5CF6] px-8 py-3 rounded-full hover:bg-gradient-to-r from-[#632EE3] to-[#9F62F2] hover:text-white">
                 Post an Product
               </button>
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <LatestProducts latestProductsPromise = {latestProductsPromise}>
+            
+        </LatestProducts>
       </div>
     </div>
   );

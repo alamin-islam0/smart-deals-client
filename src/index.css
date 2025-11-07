@@ -13,3 +13,12 @@
   --color-accent: #9F62F2;
 }
 
+.btn-primary {
+  background: linear-gradient(to right, #632EE3, #9F62F2) !important;
+  border: none !important;
+  color: white !important;
+}
+.btn-primary:hover {
+  background: linear-gradient(to right, #5528c8, #8e58de) !important;
+}
+
