@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useLoaderData, Link } from "react-router-dom";
 
 const ProductDetails = () => {
   const product = useLoaderData();
+  const bidModalRef = useRef(null);
+
+  const handleBidModalOpen = () => {
+    bidModalRef.current.showModal();
+  };
 
   return (
     <div className="min-h-screen bg-[#f5f5f5]">
@@ -71,14 +76,12 @@ const ProductDetails = () => {
               <h1 className="text-3xl font-bold text-navy-900 mb-2">
                 {product?.title}
               </h1>
-
               {/* Category Tag */}
               <div className="mb-4">
                 <span className="inline-block px-3 py-1 text-sm font-medium bg-purple-100 text-purple-600 rounded-full">
                   Art And Hobbies
                 </span>
               </div>
-
               {/* Price Range */}
               <div className="mb-4">
                 <span className="text-2xl font-bold text-green-600">
@@ -86,7 +89,6 @@ const ProductDetails = () => {
                 </span>
                 <p className="text-sm text-gray-600 mt-1">Price starts from</p>
               </div>
-
               {/* Product Details Section */}
               <div className="mb-6">
                 <h2 className="text-xl font-bold text-navy-900 mb-4">
@@ -103,7 +105,6 @@ const ProductDetails = () => {
                   </p>
                 </div>
               </div>
-
               {/* Seller Information */}
               <div className="mb-6">
                 <h2 className="text-xl font-bold text-navy-900 mb-4">
@@ -143,13 +144,123 @@ const ProductDetails = () => {
                   </p>
                 </div>
               </div>
-
               {/* Buy Button */}
-              <button className="mt-auto w-full text-center py-3 bg-white border-2 border-[#8B5CF6] text-[#8B5CF6] rounded-full 
+              <button
+                onClick={handleBidModalOpen}
+                className="mt-auto w-full text-center py-3 bg-white border-2 border-[#8B5CF6] text-[#8B5CF6] rounded-full 
              hover:bg-gradient-to-r hover:from-[#632EE3] hover:to-[#9F62F2] hover:text-white 
-             transition-all duration-300 font-medium">
+             transition-all duration-300 font-medium"
+              >
                 I Want Buy This Product
               </button>
+
+              {/* //Modal */}
+              {/* <button
+                className="btn"
+                onClick={() =>
+                  document.getElementById("my_modal_5").showModal()
+                }
+              >
+                open modal
+              </button> */}
+              <dialog
+                ref={bidModalRef}
+                className="modal modal-bottom sm:modal-middle"
+              >
+                <div className="modal-box">
+                  <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-md">
+                    <h2 className="text-2xl font-semibold text-center text-gray-900 mb-6">
+                      Give Seller Your Offered Price
+                    </h2>
+
+                    <form className="space-y-4">
+                      {/* Buyer Name & Email */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Buyer Name
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Your name"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Buyer Email
+                          </label>
+                          <input
+                            type="email"
+                            placeholder="Your Email"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Buyer Image URL */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Buyer Image URL
+                        </label>
+                        <input
+                          type="url"
+                          placeholder="https://...your_img_url"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        />
+                      </div>
+
+                      {/* Price */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Place your Price
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Artisan Roasters"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        />
+                      </div>
+
+                      {/* Contact Info */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Contact Info
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. +1-555-1234"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        />
+                      </div>
+
+                      {/* Buttons */}
+                      <div className="flex justify-end gap-3 pt-4">
+                        <button
+                          type="button"
+                          className="px-5 py-2 border border-purple-500 text-purple-600 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          className="px-5 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                        >
+                          Submit Bid
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div className="modal-action">
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="btn btn-primary text-white px-8 py-3 rounded-full transition-colors">
+                        Close
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
             </div>
           </div>
         </div>
