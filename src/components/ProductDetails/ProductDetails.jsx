@@ -124,13 +124,13 @@ const ProductDetails = () => {
                   <span className="text-sm font-medium text-gray-600">
                     Condition:
                   </span>
-                  <span className="text-sm text-navy-900">New</span>
+                  <span className="text-sm text-navy-900">{product?.condition}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm font-medium text-gray-600">
                     Usage Time:
                   </span>
-                  <span className="text-sm text-navy-900">3 Month</span>
+                  <span className="text-sm text-navy-900">{product?.usage}</span>
                 </div>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -149,7 +149,7 @@ const ProductDetails = () => {
               {/* Category Tag */}
               <div className="mb-4">
                 <span className="inline-block px-3 py-1 text-sm font-medium bg-purple-100 text-purple-600 rounded-full">
-                  Art And Hobbies
+                  {product?.category}
                 </span>
               </div>
               {/* Price Range */}
@@ -183,17 +183,17 @@ const ProductDetails = () => {
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
                     <img
-                      src={product?.seller?.avatar || "/default-avatar.png"}
+                      src={product?.seller_image || "/default-avatar.png"}
                       alt="Seller"
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div>
                     <h3 className="font-medium text-navy-900">
-                      {product?.seller?.name || "Sara Chen"}
+                      {product?.seller_name || "Sara Chen"}
                     </h3>
                     <p className="text-sm text-gray-600">
-                      {product?.seller?.email || "crafts.by.sara@shop.net"}
+                      {product?.email || "crafts.by.sara@shop.net"}
                     </p>
                   </div>
                 </div>
@@ -204,7 +204,7 @@ const ProductDetails = () => {
                   </p>
                   <p className="text-sm text-gray-600">
                     <span className="font-medium">Contact:</span>{" "}
-                    {product?.contact || "sara.chen_contact"}
+                    {product?.seller_contact || "01722-930883"}
                   </p>
                   <p className="text-sm">
                     <span className="font-medium">Status:</span>{" "}
